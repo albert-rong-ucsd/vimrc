@@ -9,6 +9,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'flazz/vim-colorschemes'
+Plug 'felixhummel/setcolors.vim'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
@@ -29,8 +32,22 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
+function! NumberToggle()
+  if(&rnu == 1)
+    set relativenumber!
+  else
+    set relativenumber
+  endif
+endfunction
+nnoremap <C-n> :call NumberToggle()<CR>
+
 
 "		--- SETTINGS ---
+" cursor
+let &t_SI .= "\e[5 q"
+let &t_SR .= "\e[3 q"
+let &t_EI .= "\e[1 q"
+
 " colorscheme
 colorscheme molokai
 let g:rehash256 = 1
